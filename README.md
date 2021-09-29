@@ -1,4 +1,4 @@
-#Scheduling Tasks with Spring boot
+# Scheduling Tasks with Spring boot
 <hr>
 
 1. Để tạo ra các tác vụ định thời cần đánh dấu các Bean bằng <b>@EnableScheduling</b>
@@ -19,7 +19,7 @@ Thêm @EnableSheduling vào class Application
 <hr>
 
 Các method định nghĩa trong Demo.class
-###Fixed Delay Task
+### Fixed Delay Task
 <pre>
     @Component //có thể thay thế bằng @configuration
     @EnableScheduling  //Đánh dấu đấy là component chứa tác vụ định thời
@@ -32,7 +32,7 @@ Các method định nghĩa trong Demo.class
     }
 </pre>
 => Thời gian mỗi tác vụ chạy có thể thay đổi, nhưng khoảng thời gian trễ giữa các tác vụ luôn cố định.
-###Fixed Rate Task
+### Fixed Rate Task
 <pre>
     @Component 
     @EnableScheduling  
@@ -48,7 +48,7 @@ Các method định nghĩa trong Demo.class
 => Cứ cách đúng 1 khoảng thời gian (fixed rate) là chạy. <br>
 Nếu tác vụ trước chạy quá lâu, thì tác vụ sau chờ thêm đến điểm là bội số nhỏ nhất của fixed rate rồi chạy.
 
-###Async Task
+### Async Task
 - Async Task sử dụng nhiều thread để thực thi các tác vụ định thời mà không phải chờ đợi nhau (Fixed Rate và Fixed Delay chỉ sử dụng 1 thread).
 <pre>
     @EnableAsync //Bật chế độ Async
@@ -65,7 +65,7 @@ Nếu tác vụ trước chạy quá lâu, thì tác vụ sau chờ thêm đến
 </pre>
 - Nếu code trong method exc() chạy quá fixedRate thì không cần lo, @Async sẽ đảm bảo mỗi lần chạy cách nhau đúng fixedRate.
 
-###Cron Task
+### Cron Task
 - Nếu cần định thời trong khoản thời gian dài hơn: ngày, tháng, giờ.... thì nên dùng cron task. Cron task được định thời theo biểu thức truyền vào tham số cron
 <pre>
     @Scheduled(cron = "0 * * ? * *") //Thời gian cách nhau 1 phút
@@ -86,14 +86,14 @@ Nếu tác vụ trước chạy quá lâu, thì tác vụ sau chờ thêm đến
 </pre>
 - Cách lấy cron: <a href="https://www.freeformatter.com/cron-expression-generator-quartz.html">Click here</a>
 
-###Initial Delay
+### Initial Delay
 
 <pre>
     @Scheduled(fixedDelay = 1000, initialDelay = 1000)
 </pre>
 => Lần đầu tiên sẽ chạy với tham số initialDelay và các lần còn lại chạy với tham số fixedDelay
 
-###Các trường hợp:
+### Các trường hợp:
 - Cuối ngày dọn rác server
 - Gửi mail cho khách hàng nếu ngày đó không làm việc vào 8h tối
 - Ứng dụng IOT thời tiết... 
